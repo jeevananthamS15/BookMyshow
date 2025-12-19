@@ -12,7 +12,15 @@ import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  "https://bookmyshow-wryg.onrender.com", // frontend domain
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(morgan("dev"));
 
 
