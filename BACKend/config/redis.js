@@ -1,13 +1,16 @@
 import { createClient } from "redis";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const redis = createClient({
-  username: "myshow",
-  password: "u#!9GRCZuXJDS.!", // same password that worked in testRedis.js
+  username: process.env.REDIS_USERNAME,
+  password: process.env.REDIS_PASSWORD,
   socket: {
-    host: "redis-19441.c266.us-east-1-3.ec2.cloud.redislabs.com",
-    port: 19441
-    // no tls here, since 19441 is non‑TLS
-  }
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    // no TLS here, since 19441 is non‑TLS
+  },
 });
 
 redis.on("error", (err) => console.error("❌ Redis Client Error:", err));
